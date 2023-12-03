@@ -13,6 +13,7 @@ app.use(express.json());
 dbConnection();
 
 app.use('/api/usuarios', require('./routes/usuariosRoutes'));
+app.use('/api/login', require('./routes/auth'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
