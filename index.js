@@ -8,20 +8,11 @@ const cors = require('cors');
 
 app.use(cors());
 
+app.use(express.json());
 
 dbConnection();
 
 app.use('/api/usuarios', require('./routes/usuariosRoutes'));
-
-// app.get('/', (req, res) => {
-
-//   res.json({
-
-//     ok:true,
-//     respuesta:"Hola Mundo"
-//   })
-
-// })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
