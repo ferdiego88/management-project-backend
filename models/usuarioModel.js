@@ -18,7 +18,7 @@ const UsuarioSchema = Schema ({
     role: {
         type:String,
         required: true,
-        default:'USER_ROLE'
+        default:'CONSUMER_ROLE'
     }
 });
 

@@ -13,6 +13,8 @@ app.use(express.json());
 dbConnection();
 
 app.use('/api/usuarios', require('./routes/usuariosRoutes'));
+app.use('/api/proyectos', require('./routes/proyectos'));
+app.use('/api/tareas', require('./routes/tareasRoutes'));
 app.use('/api/login', require('./routes/auth'));
 
 app.listen(port, () => {
