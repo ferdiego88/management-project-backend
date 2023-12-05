@@ -3,7 +3,7 @@ const User = require('../models/usuarioModel');
 const bcryptjs = require('bcryptjs');
 const { generarJWT } = require('../helpers/jwt');
 
-const login = async (req, res = response) => {
+const  login = async (req, res = response) => {
 
     const {email, password} = req.body;
 
@@ -11,7 +11,7 @@ const login = async (req, res = response) => {
 
         const usuarioDB = await User.findOne({email});
 
-
+ 
         if(!usuarioDB) {
             return res.status(404).json({
                 ok: false,
@@ -31,11 +31,10 @@ const login = async (req, res = response) => {
 
         const token = await generarJWT(usuarioDB.id);
 
-
-
         res.json({
             ok:true,
             token,
+            usuario:usuarioDB,
             msg: 'Login'
         })
         
@@ -47,6 +46,26 @@ const login = async (req, res = response) => {
     }
 }
 
+const  renewToken  = async (req, res = response) => {
+
+    const uid = req.uid;
+    const token = await generarJWT(uid);
+    
+    const usuario = await User.findById(uid);
+    
+    res.json({
+        ok:true,
+        uid,
+        token,
+        usuario,
+        msg: 'Renew Token'
+    })
+}
+
+
+
+
 module.exports = {
-    login
+    login,
+    renewToken,
 }
